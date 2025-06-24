@@ -1,0 +1,10 @@
+services:
+  rust_backend:
+    image: ./server
+    ports:
+      - 8080:8080
+
+  next_frontend:
+    image: ./frontend
+    ports:
+      - 4000:4000

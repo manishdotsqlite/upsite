@@ -1,5 +1,5 @@
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
-
+use actix_cors::Cors;
 use crate::ping::ping;
 
 mod response;
@@ -8,9 +8,13 @@ mod ping;
 #[actix_web::main]
 async fn main() {
     HttpServer::new(|| {
-        App::new()
+        App::new().wrap(Cors::default()
+                    .allow_any_origin()
+                    .allow_any_method()
+                    .allow_any_header()
+            )
         .service(pingapi) 
-    }).bind("0.0.0.0:10001").unwrap().run().await.unwrap();
+    }).bind("0.0.0.0:8000").unwrap().run().await.unwrap();
 }
 
 
